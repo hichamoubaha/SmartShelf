@@ -7,6 +7,7 @@ use App\Http\Controllers\RayonController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\AuthController;
 
+Route::middleware('auth:sanctum')->post('/produits/{produit}/vendre', [ProduitController::class, 'vendreProduit']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('rayons', RayonController::class);

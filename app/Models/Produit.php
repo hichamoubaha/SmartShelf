@@ -16,3 +16,5 @@ class Produit extends Model
         return $this->belongsTo(Rayon::class);
     }
 }
+
+//model product

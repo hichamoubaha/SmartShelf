@@ -16,3 +16,5 @@ class Rayon extends Model
         return $this->hasMany(Produit::class);
     }
 }
+
+//rayon model

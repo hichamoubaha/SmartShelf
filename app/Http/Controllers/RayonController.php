@@ -57,3 +57,6 @@ class RayonController extends Controller
         return response()->json(['message' => 'Rayon supprimé'], 200);
     }
 }
+
+
+//rayon controller

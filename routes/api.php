@@ -1,5 +1,18 @@
 <?php
-
+/**
+ * @OA\Info(
+ *     title="Supermarché API",
+ *     version="1.0",
+ *     description="API pour gérer les rayons et produits d'un supermarché",
+ *     @OA\Contact(
+ *         email="contact@supermarche.com"
+ *     )
+ * )
+ * @OA\Server(
+ *     url="http://127.0.0.1:8000/api",
+ *     description="Serveur local"
+ * )
+ */
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -8,7 +21,12 @@ use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\StatistiqueController;
 use App\Http\Controllers\AlerteController;
+ use L5Swagger\Http\Controllers\SwaggerController;
 
+ Route::get('/docs', function () {
+     return view('l5-swagger::index');
+ });
+ 
 Route::delete('/produits/{id}', [ProduitController::class, 'destroy']);
 
 

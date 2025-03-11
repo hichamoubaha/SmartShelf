@@ -11,6 +11,25 @@ class RayonController extends Controller
     /**
      * Récupérer tous les rayons
      */
+
+     /**
+ * @OA\Post(
+ *     path="/api/register",
+ *     summary="Créer un nouveau compte utilisateur",
+ *     tags={"Authentification"},
+ *     @OA\RequestBody(
+ *         required=true,
+ *         @OA\JsonContent(
+ *             required={"name","email","password"},
+ *             @OA\Property(property="name", type="string", example="John Doe"),
+ *             @OA\Property(property="email", type="string", example="johndoe@example.com"),
+ *             @OA\Property(property="password", type="string", format="password", example="password123")
+ *         ),
+ *     ),
+ *     @OA\Response(response=201, description="Compte créé avec succès"),
+ *     @OA\Response(response=400, description="Erreur de validation"),
+ * )
+ */
     public function index()
     {
         $rayons = Rayon::all();
@@ -20,6 +39,25 @@ class RayonController extends Controller
     /**
      * Ajouter un nouveau rayon
      */
+
+     /**
+ * @OA\Post(
+ *     path="/api/register",
+ *     summary="Créer un nouveau compte utilisateur",
+ *     tags={"Authentification"},
+ *     @OA\RequestBody(
+ *         required=true,
+ *         @OA\JsonContent(
+ *             required={"name","email","password"},
+ *             @OA\Property(property="name", type="string", example="John Doe"),
+ *             @OA\Property(property="email", type="string", example="johndoe@example.com"),
+ *             @OA\Property(property="password", type="string", format="password", example="password123")
+ *         ),
+ *     ),
+ *     @OA\Response(response=201, description="Compte créé avec succès"),
+ *     @OA\Response(response=400, description="Erreur de validation"),
+ * )
+ */
     public function store(Request $request)
     {
         $request->validate([
@@ -38,6 +76,25 @@ class RayonController extends Controller
     /**
      * Modifier un rayon existant
      */
+
+     /**
+ * @OA\Post(
+ *     path="/api/register",
+ *     summary="Créer un nouveau compte utilisateur",
+ *     tags={"Authentification"},
+ *     @OA\RequestBody(
+ *         required=true,
+ *         @OA\JsonContent(
+ *             required={"name","email","password"},
+ *             @OA\Property(property="name", type="string", example="John Doe"),
+ *             @OA\Property(property="email", type="string", example="johndoe@example.com"),
+ *             @OA\Property(property="password", type="string", format="password", example="password123")
+ *         ),
+ *     ),
+ *     @OA\Response(response=201, description="Compte créé avec succès"),
+ *     @OA\Response(response=400, description="Erreur de validation"),
+ * )
+ */
     public function update(Request $request, $id)
     {
         $rayon = Rayon::find($id);
@@ -59,6 +116,24 @@ class RayonController extends Controller
     /**
      * Supprimer un rayon
      */
+    /**
+ * @OA\Post(
+ *     path="/api/register",
+ *     summary="Créer un nouveau compte utilisateur",
+ *     tags={"Authentification"},
+ *     @OA\RequestBody(
+ *         required=true,
+ *         @OA\JsonContent(
+ *             required={"name","email","password"},
+ *             @OA\Property(property="name", type="string", example="John Doe"),
+ *             @OA\Property(property="email", type="string", example="johndoe@example.com"),
+ *             @OA\Property(property="password", type="string", format="password", example="password123")
+ *         ),
+ *     ),
+ *     @OA\Response(response=201, description="Compte créé avec succès"),
+ *     @OA\Response(response=400, description="Erreur de validation"),
+ * )
+ */
     public function destroy($id)
     {
         $rayon = Rayon::find($id);
@@ -75,6 +150,24 @@ class RayonController extends Controller
     /**
      * Récupérer les produits d'un rayon spécifique
      */
+
+     /**
+ * @OA\Get(
+ *     path="/rayons/{id}/produits",
+ *     summary="Obtenir tous les produits d'un rayon",
+ *     tags={"Rayons"},
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         description="ID du rayon",
+ *         @OA\Schema(type="integer")
+ *     ),
+ *     @OA\Response(response=200, description="Liste des produits du rayon"),
+ *     @OA\Response(response=404, description="Rayon non trouvé")
+ * )
+ */
+
     public function getProduitsParRayon($id)
     {
         $rayon = Rayon::find($id);

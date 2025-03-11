@@ -39,13 +39,24 @@ class ProduitController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nom' => 'required',
-            'quantite_stock' => 'required|integer|min:0',
+            'nom' => 'required|string|max:255',
             'prix' => 'required|numeric|min:0',
+            'quantite_stock' => 'required|integer|min:0',
+            'en_promotion' => 'boolean',
+            'prix_promotion' => 'nullable|numeric|min:0',
             'rayon_id' => 'required|exists:rayons,id'
         ]);
 
-        return Produit::create($request->all());
+        $produit = Produit::create([
+            'nom' => $request->nom,
+            'prix' => $request->prix,
+            'quantite_stock' => $request->quantite_stock,
+            'en_promotion' => $request->en_promotion ?? false,
+            'prix_promotion' => $request->prix_promotion ?? null,
+            'rayon_id' => $request->rayon_id
+        ]);
+
+        return response()->json($produit, 201);
     }
 
     public function show(Produit $produit)

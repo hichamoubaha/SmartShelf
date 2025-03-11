@@ -64,18 +64,33 @@ class ProduitController extends Controller
         return $produit->load('rayon');
     }
 
-    public function update(Request $request, Produit $produit)
+    public function update(Request $request, $id)
     {
+        // Vérifier si le produit existe
+        $produit = Produit::find($id);
+    
+        if (!$produit) {
+            return response()->json(['message' => 'Produit non trouvé'], 404);
+        }
+    
+        // Validation des champs
         $request->validate([
-            'nom' => 'required',
-            'quantite_stock' => 'required|integer|min:0',
-            'prix' => 'required|numeric|min:0',
-            'rayon_id' => 'required|exists:rayons,id'
+            'nom' => 'sometimes|string|max:255',
+            'description' => 'sometimes|string',
+            'prix' => 'sometimes|numeric|min:0',
+            'quantite_stock' => 'sometimes|integer|min:0',
+            'rayon_id' => 'sometimes|exists:rayons,id'
         ]);
-
+    
+        // Mettre à jour les champs remplis
         $produit->update($request->all());
-        return $produit;
+    
+        return response()->json([
+            'message' => 'Produit mis à jour avec succès',
+            'produit' => $produit
+        ], 200);
     }
+    
 
     public function destroy(Produit $produit)
     {

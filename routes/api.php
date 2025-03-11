@@ -9,6 +9,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\StatistiqueController;
 use App\Http\Controllers\AlerteController;
 
+Route::put('/produits/{id}', [ProduitController::class, 'update']);
+
+
 Route::get('/alertes/stock-faible', [AlerteController::class, 'verifierStocksFaibles']);
 
 

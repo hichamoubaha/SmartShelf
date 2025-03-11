@@ -33,7 +33,7 @@ class AuthController extends Controller
         ], 201);
     }
 
-    // Méthode pour se connecter
+    // Méthode pour se connecterr
     public function login(Request $request)
     {
         $credentials = $request->validate([

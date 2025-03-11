@@ -8,6 +8,7 @@ use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\StatistiqueController;
 
+
 Route::get('/statistiques/stocks', [StatistiqueController::class, 'statistiquesStocks']);
 
 

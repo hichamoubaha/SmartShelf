@@ -9,6 +9,17 @@ use App\Jobs\MettreAJourStockJob;
 class ProduitController extends Controller
 {
 
+    public function getProduitsEnPromotion()
+    {
+        try {
+            $produits = Produit::where('en_promotion', true)->get();
+
+            return response()->json($produits, 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
     public function vendreProduit(Request $request, Produit $produit)
 {
     $request->validate([

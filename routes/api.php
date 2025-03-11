@@ -7,6 +7,9 @@ use App\Http\Controllers\RayonController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\AuthController;
 
+Route::get('/produits/promotions', [ProduitController::class, 'getProduitsEnPromotion']);
+
+
 
 Route::get('/rayons/{id}/produits', [RayonController::class, 'getProduitsParRayon']);
 

@@ -7,6 +7,13 @@ use App\Http\Controllers\RayonController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\AuthController;
 
+Route::post('/produits', [ProduitController::class, 'store']);
+
+
+
+Route::post('/rayons', [RayonController::class, 'store']);
+
+
 Route::get('/produits/promotions', [ProduitController::class, 'getProduitsEnPromotion']);
 
 

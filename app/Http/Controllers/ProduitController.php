@@ -4,9 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Produit;
 use Illuminate\Http\Request;
+use App\Jobs\MettreAJourStockJob;
 
 class ProduitController extends Controller
 {
+
+    public function vendreProduit(Request $request, Produit $produit)
+{
+    $request->validate([
+        'quantite' => 'required|integer|min:1',
+    ]);
+
+    dispatch(new MettreAJourStockJob($produit, $request->quantite));
+
+    return response()->json(['message' => 'Commande en cours de traitement']);
+}
+
     public function index()
     {
         return Produit::with('rayon')->get();

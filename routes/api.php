@@ -7,6 +7,13 @@ use App\Http\Controllers\RayonController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\AuthController;
 
+
+Route::get('/rayons/{id}/produits', [RayonController::class, 'getProduitsParRayon']);
+
+
+
+
+
 Route::middleware('auth:sanctum')->post('/produits/{produit}/vendre', [ProduitController::class, 'vendreProduit']);
 
 Route::middleware('auth:sanctum')->group(function () {
@@ -17,6 +24,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
 
 
 Route::get('/rayons', [RayonController::class, 'index']);

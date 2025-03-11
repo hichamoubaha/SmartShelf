@@ -1,18 +1,23 @@
 <?php
 
-namespace App\Models;
+namespace App\Http\Controllers;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Produit;
+use App\Models\Rayon;
+use Illuminate\Http\Request;
 
-class Rayon extends Model
+class RayonController extends Controller
 {
-    use HasFactory;
-
-    protected $fillable = ['nom'];
-
-    public function produits()
+    public function getProduitsParRayon($id)
     {
-        return $this->hasMany(Produit::class);
+        $rayon = Rayon::find($id);
+
+        if (!$rayon) {
+            return response()->json(['message' => 'Rayon non trouvé'], 404);
+        }
+
+        $produits = Produit::where('rayon_id', $id)->get();
+
+        return response()->json($produits);
     }
 }

@@ -2,62 +2,49 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Produit;
 use Illuminate\Http\Request;
 
 class ProduitController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        return Produit::with('rayon')->get();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nom' => 'required',
+            'quantite_stock' => 'required|integer|min:0',
+            'prix' => 'required|numeric|min:0',
+            'rayon_id' => 'required|exists:rayons,id'
+        ]);
+
+        return Produit::create($request->all());
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function show(Produit $produit)
     {
-        //
+        return $produit->load('rayon');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(Request $request, Produit $produit)
     {
-        //
+        $request->validate([
+            'nom' => 'required',
+            'quantite_stock' => 'required|integer|min:0',
+            'prix' => 'required|numeric|min:0',
+            'rayon_id' => 'required|exists:rayons,id'
+        ]);
+
+        $produit->update($request->all());
+        return $produit;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy(Produit $produit)
     {
-        //
+        $produit->delete();
+        return response()->json(['message' => 'Produit supprimé']);
     }
 }

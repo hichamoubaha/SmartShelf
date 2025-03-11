@@ -2,37 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Produit;
 use App\Models\Rayon;
 use Illuminate\Http\Request;
 
 class RayonController extends Controller
 {
-    public function index()
+    public function getProduitsParRayon($id)
     {
-        return Rayon::all();
-    }
+        $rayon = Rayon::find($id);
 
-    public function store(Request $request)
-    {
-        $request->validate(['nom' => 'required|unique:rayons']);
-        return Rayon::create($request->all());
-    }
+        if (!$rayon) {
+            return response()->json(['message' => 'Rayon non trouvé'], 404);
+        }
 
-    public function show(Rayon $rayon)
-    {
-        return $rayon;
-    }
+        $produits = Produit::where('rayon_id', $id)->get();
 
-    public function update(Request $request, Rayon $rayon)
-    {
-        $request->validate(['nom' => 'required|unique:rayons,nom,' . $rayon->id]);
-        $rayon->update($request->all());
-        return $rayon;
-    }
-
-    public function destroy(Rayon $rayon)
-    {
-        $rayon->delete();
-        return response()->json(['message' => 'Rayon supprimé']);
+        return response()->json($produits);
     }
 }

@@ -12,7 +12,8 @@ class Produit extends Model
     protected $fillable = ['nom', 'quantite_stock', 'prix', 'rayon_id'];
 
     public function rayon()
-    {
-        return $this->belongsTo(Rayon::class);
-    }
+{
+    return $this->belongsTo(Rayon::class);
+}
+
 }

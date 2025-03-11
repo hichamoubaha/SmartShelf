@@ -7,6 +7,10 @@ use App\Http\Controllers\RayonController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\StatistiqueController;
+use App\Http\Controllers\AlerteController;
+
+Route::get('/alertes/stock-faible', [AlerteController::class, 'verifierStocksFaibles']);
+
 
 
 Route::get('/statistiques/stocks', [StatistiqueController::class, 'statistiquesStocks']);

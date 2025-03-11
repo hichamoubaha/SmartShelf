@@ -7,6 +7,13 @@ use App\Http\Controllers\RayonController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\AuthController;
 
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::apiResource('rayons', RayonController::class);
+    Route::apiResource('produits', ProduitController::class);
+});
+
+
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 

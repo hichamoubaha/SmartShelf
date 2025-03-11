@@ -6,6 +6,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RayonController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\StatistiqueController;
+
+Route::get('/statistiques/stocks', [StatistiqueController::class, 'statistiquesStocks']);
+
 
 Route::post('/produits', [ProduitController::class, 'store']);
 
